@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Article\Article;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -56,5 +57,11 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    // Setiap user mempunyai banyak article
+    public function articles()
+    {
+        return $this->hasMany(Article::class );
     }
 }
