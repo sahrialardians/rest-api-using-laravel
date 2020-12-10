@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Auth\RegisterRequest;
 
 class RegisterController extends Controller
 {
@@ -14,15 +14,8 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(RegisterRequest $request)
     {
-        request()->validate([
-            'name'     => ['string', 'required'],
-            'username' => ['alpha_num', 'required', 'min:3', 'max:25', 'unique:users,username'],
-            'email'    => ['email', 'required', 'unique:users,email'],
-            'password' => ['required', 'min:6']
-        ]);
-
         User::create([
             'name'      => request('name'),
             'username'  => request('username'),
