@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -25,7 +26,20 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => ['required', 'min:3', 'max:255'],
+            'body' => ['required'],
+            'subject' => ['required'],
+        ]);
+
+        $articles = auth()->user()->articles()->create([
+            'title'     => request('title'),
+            'slug'      => Str::slug(request('slug')),
+            'body'      => request('body'),
+            'subject_id'   => request('subject')
+        ]);
+
+        return $articles;
     }
 
     /**
