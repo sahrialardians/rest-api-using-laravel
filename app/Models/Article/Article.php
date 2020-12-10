@@ -2,8 +2,8 @@
 
 namespace App\Models\Article;
 
-use App\Article\Subject;
 use App\Models\User;
+use App\Models\Article\Subject;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
