@@ -63,9 +63,16 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        //
+        $article->update([
+            'title'     => request('title'),
+            'slug'      => Str::slug(request('slug')),
+            'body'      => request('body'),
+            'subject_id'   => request('subject')
+        ]);
+
+        return new ArticleResource($article);
     }
 
     /**
