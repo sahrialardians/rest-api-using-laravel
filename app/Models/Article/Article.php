@@ -10,6 +10,11 @@ class Article extends Model
 {
     protected $fillable = ['title', 'slug', 'body', 'subject_id'];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     // setiap article dipunyai satu user
     public function user()
     {
