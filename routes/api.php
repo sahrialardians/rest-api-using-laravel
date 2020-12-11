@@ -22,6 +22,7 @@ Route::namespace('Auth')->group(function(){
 Route::namespace('Article')->middleware('auth:api')->group(function(){
     Route::post('create-article', 'ArticleController@store');
     Route::patch('update-article/{article}', 'ArticleController@update'); // untuk mengupdate keseluruhan column pake PUT, untuk beberapa atau salah satu column pake PATCH
+    Route::delete('delete-article/{article}', 'ArticleController@destroy');
 });
 
 Route::get('articles/', 'Article\ArticleController@index');
