@@ -23,6 +23,7 @@ Route::namespace('Article')->middleware('auth:api')->group(function(){
     Route::post('create-article', 'ArticleController@store');
 });
 
+Route::get('articles/', 'Article\ArticleController@index');
 Route::get('articles/{article}', 'Article\ArticleController@show');
 
 Route::get('user', 'UserController');
