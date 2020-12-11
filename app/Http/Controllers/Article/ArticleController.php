@@ -35,12 +35,7 @@ class ArticleController extends Controller
             'subject' => ['required'],
         ]);
 
-        $articles = auth()->user()->articles()->create([
-            'title'     => request('title'),
-            'slug'      => Str::slug(request('slug')),
-            'body'      => request('body'),
-            'subject_id'   => request('subject')
-        ]);
+        $articles = auth()->user()->articles()->create($this->formArticle());
 
         return $articles;
     }
@@ -65,12 +60,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        $article->update([
-            'title'     => request('title'),
-            'slug'      => Str::slug(request('slug')),
-            'body'      => request('body'),
-            'subject_id'   => request('subject')
-        ]);
+        $article->update($this->formArticle());
 
         return new ArticleResource($article);
     }
@@ -84,5 +74,15 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function formArticle()
+    {
+        return [
+            'title'     => request('title'),
+            'slug'      => Str::slug(request('slug')),
+            'body'      => request('body'),
+            'subject_id'   => request('subject')
+        ];
     }
 }
